@@ -39,6 +39,9 @@
                                 <img src="{{ $post->post_image }}" alt="" class="img-fluid">
                                 <p>{{ $post->post_body }}</p>
 
+                                @guest
+                                <p><b><a href='{{url("/login")}}'>Login</a> to like and comment on the post</b></p>
+                                @else            
                                 <ul class="nav nav-pills nav-justified">
                                     <li class="nav-item">
                                         <a class="nav-link" href='{{ url("/like/{$post->id}") }}'>
@@ -63,24 +66,29 @@
                                             </span>
                                         </a>
                                     </li>
-                                </ul>                
+                                </ul>  
+                                @endguest              
                             @endforeach
 
                         @else
                             <p>No Posts Available</p>
-                        @endif  
-                        
+                        @endif
+
+                        @guest
+
+                        @else
                         <form method="POST" action='{{ url("/comment/{$post->id}") }}'>
                         {{csrf_field()}}
                             <div class="form-group">
-                                <textarea name="comment" id="comment" cols="30" rows="6" class="form-control" required autofocus>
+                                <textarea name="comment" id="comment" cols="30" rows="6" class="form-control" required>
                                 </textarea>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-lg btn-block">POST COMMENT</button>
                             </div>
                         </form>
-
+                        @endguest
+                        
                         <h3>Comments</h3>
                         @if(count($comments) > 0)
                             @foreach($comments->all() as $comment)

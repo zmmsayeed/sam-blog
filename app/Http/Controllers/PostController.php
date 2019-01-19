@@ -175,11 +175,12 @@ class PostController extends Controller
     }
 
     public function search(Request $request) {
-        $user_id = Auth::user()->id;
-        $profile = Profile::find($user_id);
+        // $user_id = Auth::user()->id;
+        // $profile = Profile::find($user_id);
         $keyword = $request->input('search');
         $posts = Post::where('post_title', 'LIKE', '%'.$keyword.'%')->get();
-        return view('posts.searchposts', ['profile' => $profile, 'posts' => $posts]);
+        // return view('posts.searchposts', ['profile' => $profile, 'posts' => $posts]);
+        return view('posts.searchposts', ['posts' => $posts]);
     }
 
 }

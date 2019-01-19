@@ -8,7 +8,7 @@
 </style>
 
 @section('content')
-<div class="container">
+<div class="container my-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
 
@@ -55,8 +55,8 @@
                             <img src="{{  url('images/avatar.png') }}" class="avatar" alt="">
                         @endif
 
-                        @if(!empty($profile))
-                            <p class="lead">{{  $profile->name }}</p>
+                        @if(!empty($user))
+                            <p class="lead">{{  $user->name }}</p>
                         @else
                             <p></p>
                         @endif

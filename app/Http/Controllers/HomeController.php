@@ -28,12 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $user_id = Auth::user()->id;
         $profile = DB::table('users')->join('profiles', 'users.id', '=', 'profiles.user_id')
                                      ->select('users.*', 'profiles.*')
                                      ->where(['profiles.user_id' => $user_id])
                                      ->first();
         $posts = Post::paginate(5);                       
-        return view('home', ['profile' => $profile, 'posts' => $posts]);
+        return view('home', ['profile' => $profile, 'posts' => $posts, 'user' => $user]);
     }
 }

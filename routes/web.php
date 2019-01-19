@@ -11,8 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'MainController@index')->name('main');
+
+
+Route::get('/about', function() {
+    return view('about');
 });
 
 Auth::routes();
